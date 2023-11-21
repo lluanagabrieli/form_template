@@ -1,7 +1,10 @@
 <main class="principal">
   <h2 class="principal__titulo">Dados do cadastro</h2>
 
-  <form class="principal__formulario" id="formulario">
+  <!-- criação de uma variável de referência "#f="ngForm"" para acessar recursos que ngForm disponibiliza-->
+  <!-- criação de um eventBinding (ngSubmit). Ele vai escutar esse evento que é realizado pelo botão de enviar formulário, chamando assim um método -->
+
+  <form class="principal__formulario" id="formulario" #f="ngForm" (ngSubmit)="cadastrar(f)">
     <h3 class="principal__subtitulo">Dados pessoais</h3>
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="nome">Nome Completo</label>
