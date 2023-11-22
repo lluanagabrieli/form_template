@@ -6,10 +6,18 @@
 
   <form class="principal__formulario" id="formulario" #f="ngForm" (ngSubmit)="cadastrar(f)">
     <h3 class="principal__subtitulo">Dados pessoais</h3>
+
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="nome">Nome Completo</label>
       <input name="nome" id="nome" class="campo__escrita" ngModel required minlength="5">
+      <!-- - f.controls['nome']: acessa o controle de nome do formulário
+           - ?: é um safe navigation, utilizado para evitar erros caso a expressão seja nula ou undefined
+           - .errors?.['required']: verifica se o controle de nome tem erros, e se tiver, verifica se é o erro específico 'required'.
+      -->
+      <span class="erro__texto" *ngIf="f.controls['nome']?.errors?.['required']">O campo de nome deve ser preenchido.</span>
+      <span class="erro__texto" *ngIf="f.controls['nome']?.errors?.['minlength']">O nome deve ter no minimo 5 caracteres.</span>
     </div>
+
     <div class="formulario__dupla">
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="nascimento">Nascimento</label>
