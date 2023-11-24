@@ -74,3 +74,9 @@
   line-height: 18px;
   color: var(--vermelho);
 }
+
+/* estilos para os elementos que tiverem as duas classes. O estilo não vai pegar no elemento form */
+.ng-touched.ng-invalid:not(form){
+  border-color: red;
+  color: red;
+}
