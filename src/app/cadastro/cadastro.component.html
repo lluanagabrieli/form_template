@@ -14,8 +14,12 @@
            - ?: é um safe navigation, utilizado para evitar erros caso a expressão seja nula ou undefined
            - .errors?.['required']: verifica se o controle de nome tem erros, e se tiver, verifica se é o erro específico 'required'.
       -->
-      <span class="erro__texto" *ngIf="f.controls['nome']?.errors?.['required']">O campo de nome deve ser preenchido.</span>
-      <span class="erro__texto" *ngIf="f.controls['nome']?.errors?.['minlength']">O nome deve ter no minimo 5 caracteres.</span>
+      <!-- span's das mensagens de erro -->
+      <!-- se o controle for inválido e tocado OU modificado -->
+      <div *ngIf="(f.controls['nome']?.invalid && f.controls['nome']?.touched) || f.controls['nome']?.dirty">
+        <span class="erro__texto" *ngIf="f.controls['nome']?.errors?.['required']">O campo de nome deve ser preenchido.</span>
+        <span class="erro__texto" *ngIf="f.controls['nome']?.errors?.['minlength']">O nome deve ter no minimo 5 caracteres.</span>
+      </div>
     </div>
 
     <div class="formulario__dupla">
