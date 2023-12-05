@@ -9,7 +9,7 @@
 
 		<div class="formulario__campo">
 			<label class="campo__etiqueta" for="nome">Nome Completo</label>
-			<input name="nome" id="nome" class="campo__escrita" ngModel required minlength="5" #nome="ngModel">
+			<input name="nome" id="nome" class="campo__escrita mudarCorDiretiva" ngModel required minlength="5" #nome="ngModel">
 			<!-- - f.controls['nome']: acessa o controle de nome do formulário
            - ?: é um safe navigation, utilizado para evitar erros caso a expressão seja nula ou undefined
            - .errors?.['required']: verifica se o controle de nome tem erros, e se tiver, verifica se é o erro específico 'required'.
@@ -26,8 +26,19 @@
 		<div class="formulario__dupla">
 			<div class="formulario__campo">
 				<label class="campo__etiqueta" for="nascimento">Nascimento</label>
-				<input name="nascimento" id="nascimento" type="date" class="campo__escrita" ngModel />
+				<input name="nascimento" id="nascimento" type="date" class="campo__escrita" ngModel #nascimento="ngModel" required MaiorIdadeValidator />
+				<!-- comando para criar uma nova diretiva: ng g directive directives/maiorIdade 
+					- é uma diretiva personalizada
+				-->
+
+				<div *ngIf="(nascimento?.invalid && nascimento?.touched) || nascimento?.dirty">
+					<app-mensagem *ngIf="nascimento?.errors?.['required']" mensagem="A data de nascimento deve ser preenchida."></app-mensagem>
+
+					<app-mensagem *ngIf="nascimento?.errors?.['MaiorIdadeValidator']" mensagem="O usuário deve ter mais de 18 anos."></app-mensagem>
+				</div>
 			</div>
+
+
 			<!-- TELEFONE -->
 			<div class="formulario__campo">
 				<label class="campo__etiqueta" for="telefone">Contato</label>
